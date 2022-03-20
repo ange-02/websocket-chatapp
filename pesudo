@@ -1,0 +1,249 @@
+username = inputField('username')
+password = inputField('password')
+
+sql = SELECT username 
+      FROM database 
+      WHERE database.user_name = username
+
+result = mysqlQUERY(sql)
+
+if (result->number_of_rows() != 0){
+    if (password == result['password']){
+        // setting session vars for later use
+        SESSION['username'] = result['username'] 
+        change_URL("http://homepage.html")
+    } else {
+        //if password is wrong, tell them they inputted wrong details
+        output("Wrong details!")
+    }
+} else {
+    // if username is wrong, tell the user their details are wrong
+    output("wrong login details!")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+username = SESSION['usename'] //using the sessions variable set when logged in
+
+sql = SELECT chat_name
+      FROM database.chat_name
+      WHERE database.chat_users LIKE username
+
+// this query finds chats which contain the username of the user
+
+result = mysqlQUERY(sql)
+
+for (rows in result) {
+    output rows
+    // outputs the rows to the main page
+    // this function can populate chats, friends and calendar events
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let socket = new websocket()
+
+form = htmlSelector(<form>) // selects all form elements in the html
+form.onClick(function() => {
+    page.stopRefresh() // preventing page refresh on form submission
+
+    // sending a trigger to the server-end file 
+    // here, the trigger name is 'chat-message' with the parameters
+    //being the value of the chatbox 
+    socket.sendTrigger('chat-message', messagebox.value())
+    messagebox.setValue(' ') //making the textbox empty after sending message
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+onTrigger('connection', (socket) => {
+    broadcast('a user connected') // sends a trigger to the front end, to
+                                  //tell ALL users that there's a new connection
+})
+
+onTrigger('chat-message', (message, username) => {
+    broadcast('new-message', (message, username)) // sends the front end a
+                                                //trigger to create the message
+})
+
+onTrigger('user-disconnect', username => {
+    broadcast('disconnect', username) // sends front end a trigger telling it
+                                    // a user disconnected
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$username = $_SESSION['username']
+$file = $_FILES['fileToUpload'] // getting the file from the html form
+
+$allowedarray = ["jpeg", "png", ...]    //this array contains allowed file types.
+                                        //this allows me to easily add/remove unwanted file types
+
+if ($file['size'] < 50*1024*1024) {
+    if ($file['type'] is in $allowed_array) {
+        move_file_to('uploadedfiles/')
+        
+        $newFileName = uniqueID($file['name'])
+        $sql = "INSERT INTO files
+                VALUES ($username, $newFileName, $file['name'], time_now())"
+
+        if ($mysqli->query($sql) == True) {
+            print('success')
+        } else {
+            print ($mysqli->error)
+        }
+    } else {
+        print('unsupported file type')
+    }
+} else {
+    print('file too large!')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

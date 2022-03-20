@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s;
+}
+
+.lightTheme {
+    --font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --box: #fff;
+    --inpt: #f8f8f8;
+    --bg1: #f1f1f1;
+    --btn1: rgb(42, 92, 255);
+    --txt1: #000;
+    --linktxt: #00f;
+    --shadow: rgb(202, 202, 202);
+}
+
+.darkTheme {
+    --font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --box: #303030;
+    --inpt: #252525;
+    --bg1: #151515;
+    --btn1: rgb(0, 174, 255);
+    --txt1: #fff;
+    --linktxt: rgb(0, 204, 255);
+    --shadow: #121212;
+}
+
+body {
+    background-color: var(--bg1);
+}
+
+#loginform {
+    color: var(--txt1);
+    border-radius: 8px;
+    text-align: center;
+    padding: 20px 60px;
+    background-color: var(--box);
+    box-shadow: 3px 3px 5px var(--shadow);
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font);
+}
+
+#registercontainer {
+    display: flex;
+}
+
+#loginform button {
+    font: inherit;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    background-color: var(--btn1);
+    padding: 10px 10px;
+    border: none;
+    border-radius: 15px;
+    margin-top: 15px;
+    transition: all 0.2s ease-out;
+}
+
+#loginform button:hover {
+    box-shadow: 3px 3px 6px var(--shadow);
+    filter: brightness(1.2);
+}
+
+#loginform input {
+    background-color: var(--inpt);
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid cyan;
+    outline: none;
+    padding: 10px 20px;
+    box-shadow: 3px 3px 2px var(--shadow);
+    color: inherit;
+    transition: all 0.2s ease-out;
+}
+
+#loginform input:focus {
+    border-bottom: 1px solid limegreen;
+}
+
+#loginform h1,
+p {
+    margin-top: 20px;
+}
+
+a {
+    color: var(--linktxt);
+}
+
+.smltxt {
+    position: absolute;
+    bottom: -20px;
+    font-size: 12px;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, 0);
+}
+
+#posdiv {
+    position: relative;
+}
+
+#error {
+    color: #e95353;
+}
+
+#studentclasses {
+    margin-left: 50px;
+    float: right;
+}

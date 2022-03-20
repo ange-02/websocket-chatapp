@@ -1,0 +1,39 @@
+ DONE:
+    Only allow users to register with stronger passwords(over 6 characters)
+    Don't allow users to send empty messages
+    Don't allow HTML tags in messages
+    Store message information into a JSON
+    Get username from the session variable into localstorage
+    Only allow logged in users to see chat
+    Store the messages into the db using JSON stringify
+    Remove dummy text from chat rooms and user side
+    Actually make rooms
+    get users to join rooms from bar(SQL)
+    Give auto names to chats
+    Allow for name change of chats
+    allow users to upload files   / make a separate file channel for each channel
+    Make people add their classes when they register and place them together
+    allow users to edit profiles
+    add default pfp
+
+TODO:
+    - Do the jquery find search for friends and chats (sidebar)
+    - only allow joined room users to join rooms
+
+
+
+BUGFIXES:
+    Load more on messages does not work... (try using $messages[] from the initial populate_msg.php in the load_more_ajax.php)
+    When clicking on friends, you can't report (no roomname)
+
+
+FIXED:
+    Sending messages with enters does not work, causes error
+    The user sending the request can accept the request for them
+    Change collation of sql database to be case sensitive
+
+
+WORD DOCUMENT:
+
+//  (Talk about how stakeholders will help me with testing and evaluating my solution at each step (ANALYSIS))
+

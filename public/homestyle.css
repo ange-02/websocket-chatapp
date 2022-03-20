@@ -1,0 +1,753 @@
+* {
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s;
+}
+
+body {
+    max-height: 100%;
+}
+
+.lightTheme {
+    --font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --box: #fff;
+    --inpt: #f8f8f8;
+    --bg1: #f1f1f1;
+    --btn1: rgb(42, 92, 255);
+    --txt1: #000;
+    --txt2: #fff;
+    --smltxt: rgb(135, 135, 135);
+    --linktxt: #00f;
+    --shadow: rgb(202, 202, 202);
+    --sidebg: #fff;
+    --msgcolor: #dcdcdc;
+    --mymsgcolor: #232aff;
+    --username: #7023ff;
+    --go: rgb(255, 107, 223);
+}
+
+.darkTheme {
+    --font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --box: #303030;
+    --inpt: #383838;
+    --bg1: #2b2b2b;
+    --btn1: rgb(0, 174, 255);
+    --txt1: #fff;
+    --txt2: #fff;
+    --smltxt: rgb(135, 135, 135);
+    --linktxt: rgb(0, 204, 255);
+    --shadow: #121212;
+    --sidebg: #222222;
+    --msgcolor: #444444;
+    --mymsgcolor: #237bff;
+    --username: #23ccff;
+    --mymsgcolor: #237bff;
+    --go: rgb(255, 107, 223);
+}
+
+body {
+    background-color: var(--bg1);
+    max-height: 100vh;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.button {
+    font: inherit;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    background-color: var(--btn1);
+    padding: 10px 10px;
+    border: none;
+    border-radius: 15px;
+    margin-top: 15px;
+    transition: all 0.2s ease-out;
+}
+
+
+/* GRID */
+
+.gridcontainer {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 5% 85% 10%;
+    grid-template-areas: "sidebar top members" "sidebar text members" "sidebar message members";
+}
+
+.scroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-color: var(--msgcolor) var(--box);
+}
+
+.scroll::-webkit-scrollbar-track {
+    -webkit-scrollbar-track: var(--msgcolor);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    -webkit-scrollbar-thumb: var(--box);
+}
+
+
+/* TOPBAR */
+
+nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    grid-area: top;
+    box-shadow: 0px 2px 10px var(--shadow);
+}
+
+#titleName {
+    color: var(--txt1);
+    font-family: var(--font);
+}
+
+#edit-chat-name {
+    position: relative;
+    font-size: 15px;
+    padding: 8px 8px;
+    margin-left: 20px;
+    transform: translate(0px, -5px);
+}
+
+#edit-chat-name:hover {
+    filter: brightness(0.8);
+}
+
+#editor-container {
+    position: relative;
+}
+
+#closetab {
+    color: var(--txt1);
+    float: right;
+    margin-bottom: 5px;
+    font-family: var(--font);
+    cursor: pointer;
+}
+
+#chat-name-notif {
+    font-family: var(--font);
+    color: red;
+    font-size: 12px;
+}
+
+#name-editor {
+    padding: 20px 20px;
+    border-radius: 10px;
+    background-color: var(--sidebg);
+    position: absolute;
+    left: 100%;
+    top: -10%;
+    z-index: 10;
+    box-shadow: 5px 5px 10px var(--shadow);
+}
+
+#file-channel {
+    position: absolute;
+    right: 10px;
+    font-size: 15px;
+    padding: 8px 8px;
+    margin-left: 20px;
+    transform: translate(0px, -5px);
+}
+
+#file-channel:hover {
+    filter: brightness(0.8);
+}
+
+
+/* SIDEBAR */
+
+#sidebar {
+    position: relative;
+    color: var(--txt1);
+    grid-area: sidebar;
+    background-color: var(--sidebg);
+    font-family: var(--font);
+    overflow: hidden;
+}
+
+.sidebarbtn {
+    text-align: left;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--sidebg);
+    color: var(--txt1);
+    padding: 15px 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 20px;
+    transition: all 0.2s;
+}
+
+
+/* #backbtn {
+    top: -20px;
+} */
+
+.sidebarbtn:hover {
+    filter: brightness(1.4)
+}
+
+.sidebar i {
+    position: absolute;
+    right: 20px;
+}
+
+.choice {
+    position: absolute;
+    right: -200%;
+    top: 100px;
+}
+
+.sidebtn {
+    position: relative;
+    width: 100%;
+    right: -200%;
+    top: 100px;
+}
+
+.activechoice {
+    position: absolute;
+    width: 100%;
+    top: -150px;
+    transform: translate(-100%, 0);
+}
+
+#sliderparent {
+    position: absolute;
+    right: -10%;
+}
+
+#mychats {
+    margin-top: 60px;
+}
+
+#report_date {
+    color: var(--smltxt);
+    font-size: 12px;
+    margin-left: 10px;
+    float: right;
+}
+
+#reporting {
+    color: var(--smltxt);
+}
+
+#report_offender {
+    overflow-wrap: break-word;
+    font-size: 20px;
+    color: red;
+}
+
+#mysettings {
+    margin-top: 80%;
+}
+
+.sidebar {
+    transition: all 0.15s;
+}
+
+#eventtxt {
+    min-width: 90%;
+    max-width: 90%;
+    max-height: 40%;
+}
+
+.active {
+    transform: translate(-100%, 0%);
+    transition: all 0.1s;
+}
+
+.searchbar {
+    max-width: 90%;
+    color: var(--txt1);
+    background-color: var(--shadow);
+    padding: 10px 10px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--bg1);
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.searchbar:focus {
+    border-bottom: 1px solid red;
+}
+
+.hidden_a_tag {
+    text-decoration: none;
+}
+
+
+/* MEMBER BAR */
+
+#memberbar {
+    color: var(--txt1);
+    grid-area: members;
+    background-color: var(--sidebg);
+    font-family: var(--font);
+}
+
+.user {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+.user:hover {
+    background-color: var(--msgcolor);
+}
+
+.user #username {
+    margin-left: 20%;
+    color: var(--username);
+}
+
+
+/* MESSAGEBOX */
+
+.messagediv {
+    color: var(--txt1);
+    grid-area: text;
+    font-family: var(--font);
+    max-height: 100%
+}
+
+.message {
+    position: relative;
+    float: left;
+    clear: both;
+    max-width: 60%;
+    color: var(--txt1);
+    height: auto;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font: inherit;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: var(--msgcolor);
+}
+
+.myMessage {
+    position: relative;
+    float: right;
+    clear: both;
+    max-width: 60%;
+    color: var(--txt2);
+    height: auto;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font: inherit;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: var(--mymsgcolor);
+}
+
+.msgspan {
+    overflow-wrap: break-word;
+}
+
+.msginfo {
+    white-space: nowrap;
+    position: absolute;
+    top: -18px;
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
+#leftsmltxt {
+    left: 0;
+    font-size: 17px;
+    color: rgb(160, 76, 160);
+}
+
+#rightsmltxt {
+    right: 0;
+    font-size: 17px;
+    color: rgb(160, 76, 160);
+}
+
+.rightsmltxtuserpic {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    right: -50px;
+    top: -20px;
+}
+
+.leftsmltxtuserpic {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    left: -50px;
+    top: -20px;
+}
+
+#smltxt {
+    position: relative;
+    margin-left: 7px;
+    font-size: 12px;
+    color: var(--smltxt);
+}
+
+
+/* TEXTBOX INPUT */
+
+#inputfield {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--txt1);
+    grid-area: message;
+    font-family: var(--font);
+}
+
+#inputfield textarea {
+    font-family: inherit;
+    max-height: 70%;
+    min-height: 70%;
+    max-width: 95%;
+    min-width: 95%;
+    background-color: var(--inpt);
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid cyan;
+    outline: none;
+    padding: 10px 20px;
+    color: inherit;
+    transition: all 0.2s ease-out;
+}
+
+.loadmore {
+    text-decoration: underline;
+    position: relative;
+    left: 50%;
+    transform: translate(50%, 0);
+    cursor: pointer;
+    color: var(--linktxt);
+}
+
+
+/* ADD FRIENDS */
+
+#search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#header {
+    font-family: var(--font);
+    color: var(--txt1);
+    font-size: 2vw;
+}
+
+#search #searchbar {
+    margin-top: 10px;
+}
+
+#searchresults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font);
+    margin-top: 10px;
+}
+
+.userfound {
+    margin-top: 5px;
+    position: relative;
+    width: 60%;
+    color: var(--txt1);
+    padding: 20px 20px;
+    background-color: var(--shadow);
+}
+
+#addfriend {
+    color: var(--txt2);
+    background-color: var(--mymsgcolor);
+    position: absolute;
+    right: 10px;
+    top: 20%;
+    padding: 8px 8px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#addfriendsml {
+    color: var(--txt2);
+    background-color: var(--mymsgcolor);
+    font-size: 15px;
+    position: absolute;
+    right: 30px;
+    top: 20%;
+    padding: 6px 6px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#addfriend:hover {
+    filter: brightness(1.2)
+}
+
+#searcher {
+    position: relative;
+}
+
+#searcher #addfriend {
+    position: absolute;
+    right: -35px;
+}
+
+#hidden {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.selected {
+    background-color: var(--linktxt);
+}
+
+#backfriends {
+    color: var(--linktxt);
+    margin-left: 7%;
+}
+
+#plus {
+    position: relative;
+    right: 0px;
+}
+
+#friendlistform {
+    transition: all 0.2s;
+}
+
+#createchat {
+    position: relative;
+}
+
+#create,
+#eventcreate {
+    background-color: var(--go);
+}
+
+#reporteduser {
+    float: left;
+    clear: both;
+}
+
+#reportsdiv {
+    max-width: 100%;
+    min-width: 100%;
+    height: 1vh;
+}
+
+#reportscontainer {
+    overflow-y: auto;
+}
+
+.userpic {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.userpicside {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    left: 10px;
+}
+
+
+/*  FILESHARING     */
+
+.filediv {
+    position: relative;
+}
+
+#sendfile {
+    position: absolute;
+    right: 350px;
+    bottom: 50px;
+    font-size: 30px;
+    padding: 20px 20px;
+    border-radius: 50%;
+}
+
+#sendfile:hover {
+    filter: brightness(0.8);
+}
+
+.show-on-overlay {
+    position: absolute;
+    background-color: var(--bg1);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    display: none;
+    padding: 20px 20px;
+}
+
+#fileToUpload {
+    background-color: var(--shadow);
+    color: var(--txt1);
+}
+
+#file-upload-title {
+    color: var(--txt1);
+    font-family: var(--font);
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.filename {
+    color: var(--linktxt);
+    padding: 0px 20px;
+}
+
+th,
+td {
+    padding: 10px 20px;
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: rgb(0, 119, 255);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--shadow);
+}
+
+tr:nth-child(even) {
+    background-color: var(--sidebg);
+}
+
+table {
+    width: 80%;
+    clear: both;
+    margin-left: 20px;
+}
+
+.gridcontainerfiles {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 5% 85% 10%;
+    grid-template-areas: "sidebar top members" "sidebar text members" "sidebar text members";
+}
+
+#uploads {
+    margin-bottom: 40px;
+}
+
+#noteToSend {
+    height: 100px;
+    width: 500px;
+    font-family: var(--font);
+    font-size: 24px;
+    position: relative;
+}
+
+#charcount,
+#charcountreport {
+    color: var(--smltxt);
+    position: absolute;
+    right: 70px;
+    top: 70%;
+}
+
+#addnote {
+    border-radius: 50%;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+}
+
+#addnote:hover {
+    filter: brightness(0.8);
+}
+
+
+/*  NOTES   */
+
+#note_user {
+    color: var(--username);
+    font-size: 20px;
+}
+
+#note_msg {
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+#note_date {
+    color: var(--smltxt);
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+#notediv {
+    margin-left: 10px;
+    padding: 10px 10px;
+}
