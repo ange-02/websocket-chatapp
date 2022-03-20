@@ -21,19 +21,9 @@ TODO:
     - only allow joined room users to join rooms
 
 
-
-BUGFIXES:
-    Load more on messages does not work... (try using $messages[] from the initial populate_msg.php in the load_more_ajax.php)
-    When clicking on friends, you can't report (no roomname)
-
-
 FIXED:
     Sending messages with enters does not work, causes error
     The user sending the request can accept the request for them
     Change collation of sql database to be case sensitive
 
-
-WORD DOCUMENT:
-
-//  (Talk about how stakeholders will help me with testing and evaluating my solution at each step (ANALYSIS))
 
